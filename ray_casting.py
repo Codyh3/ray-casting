@@ -79,7 +79,7 @@ class Emitter():
             n = (min_wall.y1 - min_wall.y2, min_wall.x2 - min_wall.x1)
             beta = -2 * dot(n, (self.v1, self.v2)) / dot(n, n)
             new_velocity = (1.001*(self.v1 + beta * n[0]), 1.001*(self.v2 + beta * n[1]))
-            print(f"MAGNITUDE: {dot(new_velocity, new_velocity)}")
+            #print(f"MAGNITUDE: {dot(new_velocity, new_velocity)}")
             new_point = (new_point[0] + (1 - lambda_min) * new_velocity[0], new_point[1] + (1 - lambda_min) * new_velocity[1])
         return new_point, new_velocity
 
@@ -134,12 +134,10 @@ def generate_random_wall():
     return Wall(random.randint(1, WIDTH), random.randint(1, HEIGHT), random.randint(1, WIDTH), random.randint(1, HEIGHT))
 
 
-window = pyglet.window.Window(height=HEIGHT, width=WIDTH)
-
 x = 600  # random.randint(100, WIDTH - 100)
 y = 450  # random.randint(100, HEIGHT - 100)
-v1 = 5
-v2 = 5
+v1 = 10
+v2 = 10
 emitter = Emitter(x, y, v1, v2, 200)
 walls = draw_rectangle()
 
@@ -155,6 +153,7 @@ def update_center(dt):
     emitter.update_position(walls)
 
 
+window = pyglet.window.Window(height=HEIGHT, width=WIDTH)
 pyglet.clock.schedule_interval(update_center, 1/60)
 
 
